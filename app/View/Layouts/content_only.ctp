@@ -4,6 +4,8 @@
 <title><?php echo $title_for_layout?></title>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 <!-- Include external files and scripts here (See HTML helper for more info.) -->
 <?php
 
@@ -31,4 +33,16 @@ show up on all of your views, include it here -->
 <!-- <div id="footer">FOOTER</div> -->
 
 </body>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+	$( function() {
+		$( "#datepicker" ).datepicker({
+			yearRange: "-80:+0",
+			changeMonth: true,
+			changeYear: true,
+			dateFormat: 'yy-mm-dd'
+		});
+	});
+</script>
 </html>

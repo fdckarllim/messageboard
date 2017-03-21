@@ -15,7 +15,7 @@ class UsersController extends AppController {
 
 	public function login() {
 		$this->set('error_login', "");
-		$this->layout = 'home';
+		$this->layout = 'content_only';
 		$isloggedin = AuthComponent::user('id');
 		if(isset($isloggedin) && $isloggedin){
 			return $this->redirect($this->Auth->redirect(array('controller' => 'users', 'action' => 'index')));
@@ -42,11 +42,13 @@ class UsersController extends AppController {
 			throw new NotFoundException(__('Invalid user'));
 		}
 		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
-		$this->set('user', $this->User->find('first', $options));
+		$information = $this->User->find('first', $options);
+		$this->set('user', $information);
+		$this->set('yourage', $this->getAge($information['User']["birthdate"]));
 	}
 
 	public function add() {
-		$this->layout = 'home';
+		$this->layout = 'content_only';
 		if ($this->request->is('post')) {
 			$this->request->data['User']['created_ip'] = $this->request->clientIp();
 			$this->User->create();
@@ -81,4 +83,10 @@ class UsersController extends AppController {
         //return $this->redirect($this->Auth->logout());
         return $this->redirect($this->Auth->logout($this->Auth->redirect(array('controller' => 'users', 'action' => 'login'))));
     }
+    public function getAge($birthdayDate){
+		 $date = new DateTime($birthdayDate);
+		 $now = new DateTime();
+		 $interval = $now->diff($date);
+		 return $interval->y;
+	}
 }

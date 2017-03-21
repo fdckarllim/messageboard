@@ -9,7 +9,7 @@
 			<td>
 				<table>
 					<tr>
-						<td><h2><?= h($user['User']['name']." 19") ?></h2></td>
+						<td><h2><?= h($user['User']['name'].' '.$yourage) ?></h2></td>
 					</tr>
 					<tr>
 						<td>Gender: <?= h($user['User']['gender'] != '' ? ($user['User']['gender'] == 'M' ? "Male" : "Female") : '') ?></td>
@@ -42,3 +42,11 @@
 		<li><?php echo $this->Html->link(__('Messages'), array('action' => 'add')); ?> </li>
 	</ul>
 </div>
+<?php 
+	function getAge($birthdayDate){
+		 $date = new DateTime($birthdayDate);
+		 $now = new DateTime();
+		 $interval = $now->diff($date);
+		 return $interval->y;
+	}
+?>

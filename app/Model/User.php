@@ -41,6 +41,12 @@ class User extends AppModel {
                 'rule' => array('notBlank'),
                 'message' => 'A email is required'
             )
+        ),
+        'birthdate' => array(
+            'required' => array(
+                'rule' => array('notBlank'),
+                'message' => 'A birthdate is required'
+            )
         )
     );
 
