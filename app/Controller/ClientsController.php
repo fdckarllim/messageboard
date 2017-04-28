@@ -9,6 +9,7 @@ class ClientsController extends AppController
 {
 	public $uses = array();	
 	public $components = array('Paginator');
+	var $helpers = array('Radio');
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
@@ -33,8 +34,18 @@ class ClientsController extends AppController
 		$this->set('clientAge', $age);
 		$this->set('client', $client['Client']);
 	}
+
 	public function add() {
 		$this->layout = 'admin';
+		if ($this->request->is('post')) {
+			$this->request->data['User']['created_ip'] = $this->request->clientIp();
+			$this->Client->create();
+			if ($this->Client->save($this->request->data)) {
+				return $this->redirect(array('controller' => 'pages', 'action' => 'success'));
+			} else {
+				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+			}
+		}
 	}
 
 	public function getage($dateofbirth){

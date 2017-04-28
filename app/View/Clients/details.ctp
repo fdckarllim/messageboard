@@ -117,7 +117,7 @@
 			<div class="tab-content">
 
 			<!-- home tab -->
-				<div class="tab-pane active" id="home">
+				<div class="tab-pane active" id="transactions">
 					<div class="table-responsive">
 						<table class="table table-hover">
 							<thead>

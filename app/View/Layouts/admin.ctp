@@ -8,18 +8,16 @@
     <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-    <title>Free Responsive Admin Theme - ZONTAL</title>
+    <title>Lending Management System | Karl Vincent Lim</title>
     <?php
-        // BOOTSTRAP CORE STYLE
         echo $this->Html->css('bootstrap');
         echo $this->Html->css('bootstrap-theme');
-        // FONT AWESOME ICONS
         echo $this->Html->css('font-awesome');
-        // CUSTOM STYLE
         echo $this->Html->css('style');
-        // CUSTOM STYLE
         echo $this->Html->css('dataTables');
         echo $this->Html->css('jquery-ui');
+        // Custom css
+        echo $this->Html->css('custom');
 
         echo $this->fetch('meta');
         echo $this->fetch('css');
@@ -168,7 +166,7 @@
                 } ]
             } );
         } );
-        $('#UserBirthdate').datepicker({ 
+        $('#birthdate').datepicker({ 
             changeYear: true,
             yearRange: "-100:+0",
             showButtonPanel: true,
