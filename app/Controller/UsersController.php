@@ -15,7 +15,7 @@ class UsersController extends AppController {
 
 	public function login() {
 		$this->set('error_login', "");
-		$this->layout = 'content_only';
+		$this->layout = 'admin';
 		$isloggedin = AuthComponent::user('id');
 		if(isset($isloggedin) && $isloggedin){
 			return $this->redirect($this->Auth->redirect(array('controller' => 'users', 'action' => 'index')));
@@ -33,11 +33,14 @@ class UsersController extends AppController {
 	}
 
 	public function index() {
+		$this->layout = 'admin';
 		$this->User->recursive = 0;
 		$this->set('users', $this->Paginator->paginate());
+		$this->set('headtitle', 'Dashboard');
 	}
 
 	public function profile($id = null) {
+		$this->set('headtitle', 'User Profile');
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Invalid user'));
 		}
