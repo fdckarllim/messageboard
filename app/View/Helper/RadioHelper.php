@@ -9,7 +9,7 @@ class RadioHelper extends AppHelper {
             $rc = "";
             foreach ($options['options'] as $val => $option) {
                 $rc .= '<label class="radio-inline" for="'.$options['name'].'-'.$val.'">';
-                $rc .= '<input type="radio" name="'.$options['name'].'" id="'.$options['name'].'-'.$val.'" value="'.$val.'" checked="checked">'.$option;
+                $rc .= '<input type="radio" name="data[Client]['.$options['name'].']" id="'.$options['name'].'-'.$val.'" value="'.$val.'" checked="checked">'.$option;
                 $rc .= '</label>';
             }
             return($rc);

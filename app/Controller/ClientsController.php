@@ -7,7 +7,10 @@ App::uses('AppController', 'Controller');
 */
 class ClientsController extends AppController
 {
-	public $uses = array();	
+	public $uses = array(
+		'Principal',
+		'Client'
+		);	
 	public $components = array('Paginator');
 	var $helpers = array('Radio');
 	
@@ -37,13 +40,23 @@ class ClientsController extends AppController
 
 	public function add() {
 		$this->layout = 'admin';
-		if ($this->request->is('post')) {
+		if ($this->request->is('post') && $this->request->data['submit'] == 'addclient') {
 			$this->request->data['User']['created_ip'] = $this->request->clientIp();
 			$this->Client->create();
 			if ($this->Client->save($this->request->data)) {
-				return $this->redirect(array('controller' => 'pages', 'action' => 'success'));
+				$client_id = $this->Client->getLastInsertId();
+				return $this->redirect(array('controller' => 'clients', 'action' => 'add?step=2&client_id='.$client_id));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+			}
+		} else if ($this->request->is('post') && $this->request->data['submit'] == 'addprincipal') {
+			$this->request->data['User']['created_ip'] = $this->request->clientIp();
+			$this->request->data['Principal']['client_id'] = $this->Client->getLastInsertId();
+			$this->Principal->create();
+			if ($this->Principal->save($this->request->data)) {
+				return $this->redirect(array('controller' => 'pages', 'action' => 'success'));
+			} else {
+				$this->Session->setFlash(__('The principal could not be saved. Please, try again.'));
 			}
 		}
 	}

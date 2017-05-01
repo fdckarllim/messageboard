@@ -87,7 +87,7 @@
                                 <h5><strong>Personal Bio : </strong></h5>
                                 Anim pariatur cliche reprehen derit.
                                 <hr />
-                                <?php echo $this->Html->link(__('Profile'), array('action' => 'profile', AuthComponent::user('id')), array('class' => 'btn btn-info btn-sm')); ?>
+                                <?php echo $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'profile', AuthComponent::user('id')), array('class' => 'btn btn-info btn-sm')); ?>
                                 <?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout'), array('class' => 'btn btn-danger btn-sm')); ?>
 
                             </div>
@@ -118,7 +118,7 @@
                                 <?php echo $this->Html->link(__('Reports'), array('controller' => 'users', 'action' => 'index')); ?>
                             </li>
                             <li>
-                                <?php echo $this->Html->link(__('Profile'), array('action' => 'profile', AuthComponent::user('id'))); ?>
+                                <?php echo $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'profile', AuthComponent::user('id'))); ?>
                             </li>
                             <li>
                                 <?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout')); ?>

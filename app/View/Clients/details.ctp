@@ -13,6 +13,7 @@
 
 	<div class="row">
 		<div class="col-sm-3">
+
 			<ul class="list-group">
 				<li class="list-group-item text-muted">Profile</li>
 				<li class="list-group-item text-right">
@@ -39,6 +40,38 @@
 				</li>
 			</ul>
 
+			<ul class="list-group">
+				<li class="list-group-item text-muted">Lending Information  
+					<i class="fa fa-dashboard fa-1x"></i>
+				</li>
+
+				<li class="list-group-item text-right">
+					<span class="pull-left">
+						<strong>Principal amount</strong>
+					</span>&#8369; 12,000
+				</li>
+
+				<li class="list-group-item text-right">
+					<span class="pull-left">
+						<strong>Months to pay</strong>
+					</span> 3 <small>month/s</small>
+				</li>
+
+				<li class="list-group-item text-right">
+					<span class="pull-left">
+						<strong>Due Date
+						</strong>
+					</span> June 11, 2017
+				</li>
+
+				<li class="list-group-item text-right">
+					<span class="pull-left">
+						<strong>Followers
+						</strong>
+					</span> 78
+				</li>
+
+			</ul>
 			<div class="panel panel-default">
 				<div class="panel-heading">Contact Info 
 				</div>
@@ -57,39 +90,6 @@
 					<?php endif; ?>
 				</div>
 			</div>
-
-			<ul class="list-group">
-				<li class="list-group-item text-muted">Activity 
-					<i class="fa fa-dashboard fa-1x"></i>
-				</li>
-
-				<li class="list-group-item text-right">
-					<span class="pull-left">
-						<strong>Shares</strong>
-					</span> 125
-				</li>
-
-				<li class="list-group-item text-right">
-					<span class="pull-left">
-						<strong>Likes</strong>
-					</span> 13
-				</li>
-
-				<li class="list-group-item text-right">
-					<span class="pull-left">
-						<strong>Posts
-						</strong>
-					</span> 37
-				</li>
-
-				<li class="list-group-item text-right">
-					<span class="pull-left">
-						<strong>Followers
-						</strong>
-					</span> 78
-				</li>
-
-			</ul>
 
 			<div class="panel panel-default">
 				<div class="panel-heading">Social Media</div>
