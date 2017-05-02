@@ -1,5 +1,18 @@
 .dateInput {
-    width: 30%;
-    display: inline;
-    margin: 1%;
+	width: 30%;
+	display: inline;
+	margin: 1%;
+}
+.profile-image{
+	margin: auto;
+	padding: 15px;
+}
+.profile-link{
+	float: none !important;
+}
+
+@media screen and (max-width: 992px) {
+	.profile-name{
+		text-align: center;
+	}
 }

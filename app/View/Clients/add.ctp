@@ -1,7 +1,7 @@
 <?php if (isset($_GET['step']) && $_GET['step'] == 2) { ?>
   <?php echo $this->Form->create('Principal', array('class' => 'form-horizontal')); ?>
   <fieldset>
-
+<?php echo $this->Flash->render(); ?>
   <!-- Form Name -->
   <legend>Add Principal</legend>
 
@@ -27,7 +27,7 @@
   <div class="form-group">
     <label class="col-md-4 control-label" for="birthdate">Date borrowed</label>  
     <div class="col-md-5">
-    <?php echo $this->Form->input('borrow_date', array('type' => 'date', 'empty' => array('day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR'), 'label' => false, 'required' => true, 'class' => 'form-control input-md dateInput', 'placeholder' => 'Your birthdate here...', 'minYear' => date('Y') - 10, 'maxYear' => date('Y') + 1)); ?>
+    <?php echo $this->Form->input('borrow_date', array('type' => 'date', 'default' => date("Y-m-d"), 'label' => false, 'required' => true, 'class' => 'form-control input-md dateInput', 'placeholder' => 'Your birthdate here...', 'minYear' => date('Y') - 10, 'maxYear' => date('Y') + 1)); ?>
     </div>
   </div>
 
@@ -36,7 +36,7 @@
     <label class="col-md-4 control-label" for="submit"></label>
     <div class="col-md-5">
       <button id="submit" name="submit" class="btn btn-primary" value="addprincipal">Save</button>
-      <button id="skip" name="submit" class="btn btn-default" value="skip">Skip</button>
+      <?php echo $this->Html->link(__('Add later'), array('controller' => 'clients', 'action' => 'details', $_GET['client_id']), array('class' => 'btn btn-default')); ?>
     </div>
   </div>
 
@@ -150,7 +150,7 @@
     <label class="col-md-4 control-label" for="submit"></label>
     <div class="col-md-8">
       <button id="submit" name="submit" class="btn btn-primary" value="addclient">Save</button>
-      <button id="cancel" name="cancel" class="btn btn-default" value="1">Cancel</button>
+      <button type="reset" id="reset" name="reset" class="btn btn-default" value="reset">Cancel</button>
     </div>
   </div>
 

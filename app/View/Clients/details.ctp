@@ -1,13 +1,11 @@
 <div class="container bootstrap snippet">
 	<div class="row">
-		<div class="col-sm-10">
+		<div class="col-md-10 col-sm-12 profile-name">
 			<h1><?php echo $client['lname'].', '.$client['fname'].' '.$client['mname']; ?></h1>
 
 		</div>
-		<div class="col-sm-2">
-			<a href="/users" class="pull-right">
-				<img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100">
-			</a>
+		<div class="col-md-2 col-sm-12">
+			<img title="profile image" class="img-circle img-responsive profile-image" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100">
 		</div>
 	</div>
 
@@ -48,25 +46,32 @@
 				<li class="list-group-item text-right">
 					<span class="pull-left">
 						<strong>Principal amount</strong>
-					</span>&#8369; 12,000
+					</span><?php echo isset($principal['amount']) ? "&#8369; ".$principal['amount'] : "<small><i>NA</i></small>"; ?>
 				</li>
 
 				<li class="list-group-item text-right">
 					<span class="pull-left">
 						<strong>Months to pay</strong>
-					</span> 3 <small>month/s</small>
+					</span>  <?php echo isset($principal['months_to_pay']) ? $principal['months_to_pay']."<small> month/s</small>" : "<small><i>NA</i></small>"; ?> 
 				</li>
 
 				<li class="list-group-item text-right">
 					<span class="pull-left">
 						<strong>Due Date
 						</strong>
-					</span> June 11, 2017
+					</span>  <?php 
+					if (isset($principal['due_date'])) {
+						echo date_format(date_create($principal['due_date']), "F d, Y"); 
+					} else {
+						echo "<small><i>NA</i></small>";
+					}
+					
+					?>
 				</li>
 
 				<li class="list-group-item text-right">
 					<span class="pull-left">
-						<strong>Followers
+						<strong>Current Balance
 						</strong>
 					</span> 78
 				</li>
@@ -78,14 +83,14 @@
 				<div class="panel-body">
 					<i class="fa fa-phone fa-1x"></i>
 					<?php if($client['phone_number']): ?>&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="tel:+<?php echo $client['phone_number']; ?>"> +<?php echo $client['phone_number'];?></a>
+						<a href="tel:+<?php echo $client['phone_number']; ?>"><small> +<?php echo $client['phone_number'];?></small></a>
 					<?php else : echo '<i>&nbsp;&nbsp;&nbsp;<small>no phone_number</small></i>'; ?>
 					<?php endif; ?>
 					<br>
 
 					<i class="fa fa-envelope fa-1x"></i>
-					<?php if($client['phone_number']): ?>&nbsp;&nbsp;&nbsp;
-					<a href="mailto:<?php echo $client['email_address'].'?subject=Mail from Our Site'; ?>"> <?php echo $client['email_address']; ?></a>
+					<?php if($client['email_address']): ?>&nbsp;&nbsp;&nbsp;
+					<a href="mailto:<?php echo $client['email_address'].'?subject=Mail from Our Site'; ?>"><small> <?php echo $client['email_address']; ?></small></a>
 					<?php else : echo '<i>&nbsp;&nbsp;&nbsp;<small>no email_address</small></i>'; ?>
 					<?php endif; ?>
 				</div>
@@ -102,6 +107,55 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- ADDING PRINCIPAL FORM IF NO PRINCIPAL  -->
+		<?php if(!isset($principal['amount'])) { ?>
+		<div class="col-sm-9">
+			<?php echo $this->Form->create('Principal', array('class' => 'form-horizontal')); ?>
+			  <fieldset>
+			<?php echo $this->Flash->render(); ?>
+			  <!-- Form Name -->
+			  <legend>Add Principal</legend>
+
+			  <!-- Text input-->
+			  <div class="form-group">
+			    <label class="col-md-4 control-label" for="fname">Amount</label>  
+			    <div class="col-md-5">
+			      <?php echo $this->Form->input('amount', array('label' => false, 'class' => 'form-control input-md', 'placeholder' => 'Place amount to borrow...', 'required' => true)); ?>
+			      
+			    </div>
+			  </div>
+
+			  <!-- Text input-->
+			  <div class="form-group">
+			    <label class="col-md-4 control-label" for="mname">Months to pay</label>  
+			    <div class="col-md-5">
+			      <?php echo $this->Form->input('months_to_pay', array('type' => 'number', 'min' => 1, 'max' => 12, 'label' => false, 'class' => 'form-control input-md', 'placeholder' => 'Number of months to pay...')); ?>
+			      
+			    </div>
+			  </div>
+
+			  <!-- Text input-->
+			  <div class="form-group">
+			    <label class="col-md-4 control-label" for="birthdate">Date borrowed</label>  
+			    <div class="col-md-5">
+			    <?php echo $this->Form->input('borrow_date', array('type' => 'date', 'default' => date("Y-m-d"), 'label' => false, 'required' => true, 'class' => 'form-control input-md dateInput', 'placeholder' => 'Your birthdate here...', 'minYear' => date('Y') - 10, 'maxYear' => date('Y') + 1)); ?>
+			    </div>
+			  </div>
+
+			  <!-- Button (Double) -->
+			  <div class="form-group">
+			    <label class="col-md-4 control-label" for="submit"></label>
+			    <div class="col-md-5">
+			      <button id="submit" name="submit" class="btn btn-primary" value="addprincipal">Save</button>
+			      <button type="reset" class="btn btn-default">Cancel</button>
+			    </div>
+			  </div>
+
+			  </fieldset>
+			  <?php echo $this->Form->end(); ?>
+		</div><hr>
+		<?php } ?>
 		<div class="col-sm-9">
 			<ul class="nav nav-tabs" id="myTab">
 				<li class="active">
@@ -121,7 +175,7 @@
 					<div class="table-responsive">
 						<table class="table table-hover">
 							<thead>
-								<tr>
+								<tr>	
 									<th>#</th>
 									<th>Amount</th>
 									<th>Interest</th>

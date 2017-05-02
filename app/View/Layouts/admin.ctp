@@ -56,14 +56,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">
 
-                    <img src="<?php echo $this->webroot; ?>img/logo.png" />
-                </a>
+                <?php echo $this->Html->link(__('LMS'), array('controller' => 'users', 'action' => 'index'), array('class' => 'navbar-brand')); ?>
+                <!-- <a class="navbar-brand" href="index.html">
+                LMS -->
+                    <!-- <img src=" -->
+                    <?php //echo $this->webroot; ?>
+                    <!-- img/logo.png" /> -->
+                <!-- </a> -->
 
             </div>
 
-            <div class="left-div">
+     <!--        <div class="left-div">
                 <div class="user-settings-wrapper">
                     <ul class="nav">
 
@@ -86,17 +90,17 @@
                                 <hr />
                                 <h5><strong>Personal Bio : </strong></h5>
                                 Anim pariatur cliche reprehen derit.
-                                <hr />
-                                <?php echo $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'profile', AuthComponent::user('id')), array('class' => 'btn btn-info btn-sm')); ?>
-                                <?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout'), array('class' => 'btn btn-danger btn-sm')); ?>
+                                <hr /> -->
+                                <?php //echo $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'profile', AuthComponent::user('id')), array('class' => 'btn btn-info btn-sm')); ?>
+                                <?php //echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout'), array('class' => 'btn btn-danger btn-sm')); ?>
 
-                            </div>
+                       <!--      </div>
                         </li>
 
 
                     </ul>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
         <!-- LOGO HEADER END-->
