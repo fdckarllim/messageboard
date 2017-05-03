@@ -15,7 +15,7 @@ class UsersController extends AppController {
 
 	public function login() {
 		$this->set('error_login', "");
-		$this->layout = 'admin';
+		$this->layout = 'content_only';
 		$isloggedin = AuthComponent::user('id');
 		if(isset($isloggedin) && $isloggedin){
 			return $this->redirect($this->Auth->redirect(array('controller' => 'users', 'action' => 'index')));
