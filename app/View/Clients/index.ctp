@@ -9,7 +9,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <table id="example" class="table table-striped" cellspacing="0" width="100%">
+        <table id="dataTable" class="table table-striped" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>ID</th>

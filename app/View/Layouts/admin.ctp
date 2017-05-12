@@ -163,7 +163,7 @@
     ?>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#example').DataTable( {
+            $('#dataTable').DataTable( {
                 "columnDefs": [ {
                 "targets": 'no-sort',
                 "orderable": false,

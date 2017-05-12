@@ -11,7 +11,8 @@ class ClientsController extends AppController
 		'Client',
 		'Principal',
 		'Payment',
-		'Advance'
+		'Advance',
+		'Transaction'
 		);	
 	public $components = array('Paginator');
 	var $helpers = array('Radio');
@@ -35,47 +36,24 @@ class ClientsController extends AppController
 				'recursive' => -1
 			)
 		);
-
+		$this->set('transactions', $this->getClientTransactions($id));
 		$principal = $this->getClientPrincipal($id);
-		$transactions = $this->getClientTransactions($id);
-		// echo "<pre>";
-		// var_dump($transactions);
-		// exit();
+
 		$age = $this->getage($client['Client']['birthdate']);
 		$this->set('principal', isset($principal['Principal']) ? $principal['Principal'] : '');
 		$this->set('clientAge', $age);
 		$this->set('client', $client['Client']);
-		if ($this->request->is('post') && $this->request->data['submit'] == 'addprincipal') {
-			if ($id) {
-				$previous_lend = $this->Principal->find('all', array(
-						'fields' => 'Principal.id',
-						'conditions' => array(
-								'Principal.client_id' => $id,
-								'Principal.paid_flg' => 0
-							),
-						'recursive' => -1
-					)
-				);
-				if (isset($previous_lend) && $previous_lend) {
-					$this->Session->setFlash(__('Please settle previous lend before adding another one.'), 'default', array('class' => 'alert alert-danger'));
-				}
-				else {
-					$this->request->data['User']['created_ip'] = $this->request->clientIp();
-					$pdata = $this->request->data['Principal'];
-					$borrow_date = $pdata['borrow_date']['year']."-".$pdata['borrow_date']['month']."-".$pdata['borrow_date']['day'];
-					$this->request->data['Principal']['due_date'] = Date("Y-m-d", strtotime( $borrow_date."+".$pdata['months_to_pay']." Month"));
-					$this->request->data['Principal']['client_id'] = $id;
 
-					$this->Principal->create();
-					if ($this->Principal->save($this->request->data)) {
-						return $this->redirect(array('action' => 'details', $id));
-					} else {
-						$this->Session->setFlash(__('The principal could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
-					}
-				}
-			} else {
-				$this->Session->setFlash(__('The principal could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+		if ($this->request->is('post')) {
+			switch ($this->request->data['submit']) {
+				case 'addprincipal':
+					$this->addPrincipal($id, $this->request->data);
+					break;
+				case 'addpayment':
+					$this->addPayment($id, $this->request->data);
+					break;
 			}
+
 		}
 	}
 
@@ -151,25 +129,106 @@ class ClientsController extends AppController
 	}
 
 	public function getClientTransactions($id){
-		$transactions = $this->Client->find('all', array(
-				'fields' => array(
-					'Client.id',
-					'Principal.*',
-				),
+		$transactions = $this->Transaction->find('all', array(
 				'conditions' => array(
-					'Client.id' => $id
-				),
-				'joins' => array(
-					array(
-						'table' => 'principals',
-						'alias' => 'Principal',
-						'type' => 'LEFT',
-						'conditions' => 'Client.id = Principal.client_id'
-					)
+					'Transaction.client_id' => $id
 				),
 				'recursive' => -1
 			)
 		);
 		return $transactions;
+	}
+	public function getInterest($amount, $months_to_pay){
+		if ($amount && $months_to_pay) {
+			return $interest = $amount * (.1 * $months_to_pay);
+		} else {
+			return false;
+		}
+	}
+	public function getBalance($client_id, $newAmount){
+		if ($client_id && $newAmount) {
+			return $balance = $newAmount;
+		} else {
+			return false;
+		}
+	}
+	public function addPrincipal($id, $requestdata){
+		if ($id) {
+			$previous_lend = $this->Principal->find('all', array(
+					'fields' => 'Principal.id',
+					'conditions' => array(
+							'Principal.client_id' => $id,
+							'Principal.paid_flg' => 0
+						),
+					'recursive' => -1
+				)
+			);
+			if (isset($previous_lend) && $previous_lend) {
+				$this->Session->setFlash(__('Please settle previous lend before adding another one.'), 'default', array('class' => 'alert alert-danger'));
+			}
+			else {
+				$transdata = $requestdata['Principal'];
+				$interest = $this->getInterest($transdata['amount'], $transdata['months_to_pay']);
+				$balance = $this->getBalance($id, $transdata['amount'] + $interest);
+				$transaction['Transaction'] = array(
+						'client_id' => $id,
+						'amount' => $transdata['amount'],
+						'type' => 1,
+						'interest' => $interest,
+						'balance' => $balance
+					);
+
+				$pdata = $requestdata['Principal'];
+				$borrow_date = $pdata['borrow_date']['year']."-".$pdata['borrow_date']['month']."-".$pdata['borrow_date']['day'];
+				$requestdata['Principal']['due_date'] = Date("Y-m-d", strtotime( $borrow_date."+".$pdata['months_to_pay']." Month"));
+				$requestdata['Principal']['client_id'] = $id;
+
+				$this->Principal->create();
+				if ($this->Principal->save($requestdata)) {
+					$this->Transaction->save($transaction);
+					return $this->redirect(array('action' => 'details', $id));
+				} else {
+					$this->Session->setFlash(__('The principal could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+				}
+
+
+			}
+		} else {
+			$this->Session->setFlash(__('The principal could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+		}
+	}
+
+	public function addPayment($id, $requestdata){
+		if ($id) {
+				$transdata = $requestdata['Payment'];
+				$balance = $this->getBalance($id, $transdata['amount']);
+				$transaction['Transaction'] = array(
+						'client_id' => $id,
+						'amount' => $transdata['amount'],
+						'type' => 3,
+						'interest' => null,
+						'balance' => $balance
+					);
+
+			$requestdata['Payment']['client_id'] = $id;
+			// var_dump($requestdata);
+			$this->Payment->create();
+			if ($this->Payment->save($requestdata)) {
+				$this->Transaction->save($transaction);
+				return $this->redirect(array('action' => 'details', $id));
+			} else {
+				var_dump("error saving...");
+				exit();
+				$this->Session->setFlash(__('The payment could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+			}
+		} else {
+				var_dump("no ID...");
+				exit();
+			$this->Session->setFlash(__('The payment could not be saved. Please, try again.'), 'default', array('class' => 'alert alert-danger'));
+		}
+	}
+
+	public function addAdvance($id, $requestdata){
+		
 	}
 }

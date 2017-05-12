@@ -4,40 +4,22 @@
 			<h1><?php echo $client['lname'].', '.$client['fname'].' '.$client['mname']; ?></h1>
 
 		</div>
-		<div class="col-md-2 col-sm-12">
+		<!-- <div class="col-md-2 col-sm-12">
 			<img title="profile image" class="img-circle img-responsive profile-image" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100">
-		</div>
-	</div>
+		</div> -->
+	</div><br/>
 
 	<div class="row">
 		<div class="col-sm-3">
 
-			<ul class="list-group">
-				<li class="list-group-item text-muted">Profile</li>
-				<li class="list-group-item text-right">
-					<span class="pull-left">
-						<strong>Nickname</strong>
-					</span> <?php echo $client['nickname'] ? $client['nickname'] : $client['fname']; ?>
-				</li>
-				<li class="list-group-item text-right">
-					<span class="pull-left">
-						<strong>Birthdate</strong>
-					</span> <?php $birthdata = strtotime($client['birthdate']);
-					 echo date('F d, Y', $birthdata); ?>
-				</li>
-				<li class="list-group-item text-right">
-					<span class="pull-left">
-						<strong>Gender</strong>
-					</span> <?php echo $client['gender'] != 0 ? $client['gender'] == 1 ? 'Male' : 'Female' : ' <i><small>Undecided</small></i>'; ?>
-				</li>
-				<li class="list-group-item text-right">
-					<span class="pull-left">
-						<strong>Age
-						</strong>
-					</span> <?php echo $clientAge; ?>
-				</li>
-			</ul>
-
+			<div class="row">
+				<div class="col-sm-12">
+					<button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#paymentModal">PAY NOW!</button><br/>
+					<button type="button" class="btn btn-info btn-md btn-block" data-toggle="modal" data-target="#advanceModal">ADVANCE</button>
+					<button type="button" class="btn btn-primary btn-md btn-block" data-toggle="modal" data-target="#principalModal">ADD PRINCIPAL</button>
+				</div>
+			</div>
+			<br/>
 			<ul class="list-group">
 				<li class="list-group-item text-muted">Lending Information  
 					<i class="fa fa-dashboard fa-1x"></i>
@@ -96,7 +78,7 @@
 				</div>
 			</div>
 
-			<div class="panel panel-default">
+			<!-- <div class="panel panel-default">
 				<div class="panel-heading">Social Media</div>
 				<div class="panel-body"> 
 					<i class="fa fa-facebook fa-2x"></i> 
@@ -105,57 +87,9 @@
 					<i class="fa fa-pinterest fa-2x"></i> 
 					<i class="fa fa-google-plus fa-2x"></i>
 				</div>
-			</div>
+			</div> -->
 		</div>
 
-		<!-- ADDING PRINCIPAL FORM IF NO PRINCIPAL  -->
-		<?php if(!isset($principal['amount'])) { ?>
-		<div class="col-sm-9">
-			<?php echo $this->Form->create('Principal', array('class' => 'form-horizontal')); ?>
-			  <fieldset>
-			<?php echo $this->Flash->render(); ?>
-			  <!-- Form Name -->
-			  <legend>Add Principal</legend>
-
-			  <!-- Text input-->
-			  <div class="form-group">
-			    <label class="col-md-4 control-label" for="fname">Amount</label>  
-			    <div class="col-md-5">
-			      <?php echo $this->Form->input('amount', array('label' => false, 'class' => 'form-control input-md', 'placeholder' => 'Place amount to borrow...', 'required' => true)); ?>
-			      
-			    </div>
-			  </div>
-
-			  <!-- Text input-->
-			  <div class="form-group">
-			    <label class="col-md-4 control-label" for="mname">Months to pay</label>  
-			    <div class="col-md-5">
-			      <?php echo $this->Form->input('months_to_pay', array('type' => 'number', 'min' => 1, 'max' => 12, 'label' => false, 'class' => 'form-control input-md', 'placeholder' => 'Number of months to pay...')); ?>
-			      
-			    </div>
-			  </div>
-
-			  <!-- Text input-->
-			  <div class="form-group">
-			    <label class="col-md-4 control-label" for="birthdate">Date borrowed</label>  
-			    <div class="col-md-5">
-			    <?php echo $this->Form->input('borrow_date', array('type' => 'date', 'default' => date("Y-m-d"), 'label' => false, 'required' => true, 'class' => 'form-control input-md dateInput', 'placeholder' => 'Your birthdate here...', 'minYear' => date('Y') - 10, 'maxYear' => date('Y') + 1)); ?>
-			    </div>
-			  </div>
-
-			  <!-- Button (Double) -->
-			  <div class="form-group">
-			    <label class="col-md-4 control-label" for="submit"></label>
-			    <div class="col-md-5">
-			      <button id="submit" name="submit" class="btn btn-primary" value="addprincipal">Save</button>
-			      <button type="reset" class="btn btn-default">Cancel</button>
-			    </div>
-			  </div>
-
-			  </fieldset>
-			  <?php echo $this->Form->end(); ?>
-		</div><hr>
-		<?php } ?>
 		<div class="col-sm-9">
 			<ul class="nav nav-tabs" id="myTab">
 				<li class="active">
@@ -173,45 +107,58 @@
 			<!-- home tab -->
 				<div class="tab-pane active" id="transactions">
 					<div class="table-responsive">
-						<table class="table table-hover">
-							<thead>
-								<tr>	
-									<th>#</th>
-									<th>Amount</th>
-									<th>Interest</th>
-									<th>Type</th>
-									<th>Balance</th>
-									<th>Date</th>
-								</tr>
-							</thead>
-							<tbody id="items">
-								<tr>
-									<td>1</td>
-									<td>&#8369; 20,000</td>
-									<td>&#8369; 6,000</td>
-									<td>BORROW</td>
-									<td>&#8369; 26,000</td>
-									<td>March 11, 2017</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>&#8369; 4,350</td>
-									<td><small><i>NA</i></small></td>
-									<td>PAYMENT</td>
-									<td>&#8369; 21,650</td>
-									<td>March 24, 2017</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>&#8369; 4,000</td>
-									<td>&#8369; 200</td>
-									<td>BORROW</td>
-									<td>&#8369; 25,850</td>
-									<td>March 25, 2017</td>
-								</tr>
-							</tbody>
-						</table>
+						<h1></h1>
+						<div class="col-md-12">
+							<table class="table table-hover table-striped" id="dataTable">
+								<thead>
+									<tr>	
+										<th>#</th>
+										<th>Amount</th>
+										<th>Interest</th>
+										<th>Type</th>
+										<th>Balance</th>
+										<th>Date</th>
+									</tr>
+								</thead>
+								<tbody id="items">
+								<?php 
+								if ($transactions) {
+									$num = count($transactions);
+									foreach ($transactions as $transaction) {
+										$tdata = $transaction['Transaction']; 
+										$date = date_create($tdata['created']);
+										switch ($tdata['type']) {
+											case '1':
+												$ttype = 'PRINCIPAL';
+												break;
+											case '2':
+												$ttype = 'ADVANCE';
+												break;
+											case '3':
+												$ttype = 'PAYMENT';
+												break;
+											default :
+												$ttype = 'NA';
+												break;
+										}
+
+										?>
+									<tr>
+										<td><?php echo $num; ?></td>
+										<td>&#8369; <?php echo $tdata['amount']; ?></td>
+										<td>&#8369; <?php echo $tdata['interest']; ?></td>
+										<td><?php echo $ttype; ?></td>
+										<td>&#8369; <?php echo $tdata['balance']; ?></td>
+										<td><?php echo date_format($date, 'F j, Y | g:ia l'); ?></td>
+									</tr>
+								<?php 
+								$num--;
+								} } ?>
+
+								</tbody>
+							</table>
 						<hr>
+						</div>
 						<div class="row">
 							<div class="col-md-4 col-md-offset-4 text-center">
 								<ul class="pagination" id="myPager"></ul>
@@ -348,5 +295,7 @@
 				</div>
 			</div>
 		</div>
-</div>
+	</div>
+	<?php echo $this->element('modals'); ?>
+
 </div>
