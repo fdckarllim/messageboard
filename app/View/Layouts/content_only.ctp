@@ -9,11 +9,18 @@
 <!-- Include external files and scripts here (See HTML helper for more info.) -->
 <?php
 
-echo $this->Html->css('cake.custom');
+	echo $this->Html->css('bootstrap');
+	echo $this->Html->css('bootstrap-theme');
+	echo $this->Html->css('font-awesome');
+	echo $this->Html->css('style');
+	echo $this->Html->css('dataTables');
+	echo $this->Html->css('jquery-ui');
+	// Custom css
+	echo $this->Html->css('custom');
 
-echo $this->fetch('meta');
-echo $this->fetch('css');
-echo $this->fetch('script');
+	echo $this->fetch('meta');
+	echo $this->fetch('css');
+	echo $this->fetch('script');
 ?>
 </head>
 <body>
@@ -25,9 +32,11 @@ show up on all of your views, include it here -->
 </div> -->
 
 <!-- Here's where I want my views to be displayed -->
-<div id="content">
-	<?php echo $this->fetch('content'); ?>
-</div>
+	<div class="content-wrapper">
+		<div class="container">
+			<?php echo $this->fetch('content'); ?>
+		</div>
+	</div>
 
 <!-- Add a footer to each displayed page -->
 <!-- <div id="footer">FOOTER</div> -->

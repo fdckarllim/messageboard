@@ -8,18 +8,16 @@
     <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-    <title>Free Responsive Admin Theme - ZONTAL</title>
+    <title>Lending Management System | Karl Vincent Lim</title>
     <?php
-        // BOOTSTRAP CORE STYLE
         echo $this->Html->css('bootstrap');
         echo $this->Html->css('bootstrap-theme');
-        // FONT AWESOME ICONS
         echo $this->Html->css('font-awesome');
-        // CUSTOM STYLE
         echo $this->Html->css('style');
-        // CUSTOM STYLE
         echo $this->Html->css('dataTables');
         echo $this->Html->css('jquery-ui');
+        // Custom css
+        echo $this->Html->css('custom');
 
         echo $this->fetch('meta');
         echo $this->fetch('css');
@@ -33,7 +31,7 @@
     <![endif]-->
 </head>
 
-    <header>
+   <!--  <header>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -44,7 +42,7 @@
                 </small>
             </div>
         </div>
-    </header>
+    </header> -->
     <!-- HEADER END-->
 
     <?php $name = AuthComponent::user('name'); 
@@ -58,14 +56,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">
 
-                    <img src="<?php echo $this->webroot; ?>img/logo.png" />
-                </a>
+                <?php echo $this->Html->link(__('LMS'), array('controller' => 'users', 'action' => 'index'), array('class' => 'navbar-brand')); ?>
+                <!-- <a class="navbar-brand" href="index.html">
+                LMS -->
+                    <!-- <img src=" -->
+                    <?php //echo $this->webroot; ?>
+                    <!-- img/logo.png" /> -->
+                <!-- </a> -->
 
             </div>
 
-            <div class="left-div">
+     <!--        <div class="left-div">
                 <div class="user-settings-wrapper">
                     <ul class="nav">
 
@@ -88,17 +90,17 @@
                                 <hr />
                                 <h5><strong>Personal Bio : </strong></h5>
                                 Anim pariatur cliche reprehen derit.
-                                <hr />
-                                <?php echo $this->Html->link(__('Profile'), array('action' => 'profile', AuthComponent::user('id')), array('class' => 'btn btn-info btn-sm')); ?>
-                                <?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout'), array('class' => 'btn btn-danger btn-sm')); ?>
+                                <hr /> -->
+                                <?php //echo $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'profile', AuthComponent::user('id')), array('class' => 'btn btn-info btn-sm')); ?>
+                                <?php //echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout'), array('class' => 'btn btn-danger btn-sm')); ?>
 
-                            </div>
+                       <!--      </div>
                         </li>
 
 
                     </ul>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
         <!-- LOGO HEADER END-->
@@ -117,10 +119,10 @@
                                 <?php echo $this->Html->link(__('Clients'), array('controller' => 'clients', 'action' => 'index')); ?>
                             </li>
                             <li>
-                                <?php echo $this->Html->link(__('Reports'), array('controller' => 'users', 'action' => 'index')); ?>
+                                <?php echo $this->Html->link(__('Reports'), array('controller' => 'reports', 'action' => 'index')); ?>
                             </li>
                             <li>
-                                <?php echo $this->Html->link(__('Profile'), array('action' => 'profile', AuthComponent::user('id'))); ?>
+                                <?php echo $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'profile', AuthComponent::user('id'))); ?>
                             </li>
                             <li>
                                 <?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout')); ?>
@@ -161,18 +163,24 @@
     ?>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#example').DataTable( {
+            $('#dataTable').DataTable( {
+                "order": [],
                 "columnDefs": [ {
                 "targets": 'no-sort',
                 "orderable": false,
                 } ]
             } );
         } );
-        $('#UserBirthdate').datepicker({ 
+        $('#birthdate').datepicker({ 
             changeYear: true,
             yearRange: "-100:+0",
             showButtonPanel: true,
             changeMonth: true
+        });
+        $('#txtInterest').keyup(function(){
+            var amount = $(this).val();
+            var interest = amount * .05;
+            $('#lblInterest').html('&#8369; '+interest);
         });
     </script>
 </body>

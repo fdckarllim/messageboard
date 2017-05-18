@@ -1,43 +1,87 @@
 <div class="container bootstrap snippet">
 	<div class="row">
-		<div class="col-sm-10">
+		<div class="col-md-10 col-sm-12 profile-name">
 			<h1><?php echo $client['lname'].', '.$client['fname'].' '.$client['mname']; ?></h1>
 
 		</div>
-		<div class="col-sm-2">
-			<a href="/users" class="pull-right">
-				<img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100">
-			</a>
-		</div>
-	</div>
+		<!-- <div class="col-md-2 col-sm-12">
+			<img title="profile image" class="img-circle img-responsive profile-image" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100">
+		</div> -->
+	</div><br/>
 
 	<div class="row">
 		<div class="col-sm-3">
+
+			<div class="row">
+				<div class="col-sm-12">
+					<button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#paymentModal" <?php echo isset($client['balance']) && $client['balance'] != 0 ? '' : 'disabled="true"';?>>PAY NOW!</button><br/>
+					<!-- hide principal button if principal amount is set -->
+					<?php if(isset($principal['amount'])) : ?>
+					<button type="button" class="btn btn-info btn-md btn-block" data-toggle="modal" data-target="#advanceModal">ADVANCE</button>
+					<?php else : ?>
+					<button type="button" class="btn btn-primary btn-md btn-block" data-toggle="modal" data-target="#principalModal">ADD PRINCIPAL</button>
+					<?php endif; ?>
+				</div>
+			</div>
+			<br/>
 			<ul class="list-group">
-				<li class="list-group-item text-muted">Profile</li>
-				<li class="list-group-item text-right">
-					<span class="pull-left">
-						<strong>Nickname</strong>
-					</span> <?php echo $client['nickname'] ? $client['nickname'] : $client['fname']; ?>
+				<li class="list-group-item text-muted">Lending Information  
+					<i class="fa fa-dashboard fa-1x"></i>
 				</li>
+
 				<li class="list-group-item text-right">
 					<span class="pull-left">
-						<strong>Birthdate</strong>
-					</span> <?php $birthdata = strtotime($client['birthdate']);
-					 echo date('F d, Y', $birthdata); ?>
+						<strong>Principal amount</strong>
+					</span><?php echo isset($principal['amount']) ? "&#8369; ".$principal['amount'] : "<small><i>NA</i></small>"; ?>
 				</li>
+
 				<li class="list-group-item text-right">
 					<span class="pull-left">
-						<strong>Gender</strong>
-					</span> <?php echo $client['gender'] != 0 ? $client['gender'] == 1 ? 'Male' : 'Female' : ' <i><small>Undecided</small></i>'; ?>
+						<strong>Months to pay</strong>
+					</span>  <?php echo isset($principal['months_to_pay']) ? $principal['months_to_pay']."<small> month/s</small>" : "<small><i>NA</i></small>"; ?> 
 				</li>
+
 				<li class="list-group-item text-right">
 					<span class="pull-left">
-						<strong>Age
+						<strong>Due Date
 						</strong>
-					</span> <?php echo $clientAge; ?>
+					</span>  <?php 
+					if (isset($principal['due_date'])) {
+						echo date_format(date_create($principal['due_date']), "F d, Y"); 
+					} else {
+						echo "<small><i>NA</i></small>";
+					}
+					
+					?>
 				</li>
+
+				<li class="list-group-item text-right">
+					<span class="pull-left">
+						<strong>Current Balance
+						</strong>
+					</span> <?php echo $client['balance'] ? "&#8369; ".$client['balance'] : "<small><i>No Balance</i></small>"; ?>
+				</li>
+
 			</ul>
+			<!-- next pay info panel -->
+			<div class="panel panel-default">
+				<div class="panel-heading">Next Pay 
+				</div>
+				<div class="panel-body">
+					<i class="fa fa-money fa-1x"></i>
+					<?php if($client['balance']): ?>&nbsp;&nbsp;&nbsp;&nbsp;
+						&#8369; <small> <?php echo $client['phone_number'];?></small>
+					<?php else : echo '<i>&nbsp;&nbsp;&nbsp;<small>nothing to pay</small></i>'; ?>
+					<?php endif; ?>
+					<br>
+
+					<i class="fa fa-calendar fa-1x"></i>
+					<?php if($client['email_address']): ?>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="mailto:<?php echo $client['email_address'].'?subject=Mail from Our Site'; ?>"><small> <?php echo $client['email_address']; ?></small></a>
+					<?php else : echo '<i>&nbsp;&nbsp;&nbsp;&nbsp;<small>no email_address</small></i>'; ?>
+					<?php endif; ?>
+				</div>
+			</div>
 
 			<div class="panel panel-default">
 				<div class="panel-heading">Contact Info 
@@ -45,53 +89,20 @@
 				<div class="panel-body">
 					<i class="fa fa-phone fa-1x"></i>
 					<?php if($client['phone_number']): ?>&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="tel:+<?php echo $client['phone_number']; ?>"> +<?php echo $client['phone_number'];?></a>
+						<a href="tel:+<?php echo $client['phone_number']; ?>"><small> +<?php echo $client['phone_number'];?></small></a>
 					<?php else : echo '<i>&nbsp;&nbsp;&nbsp;<small>no phone_number</small></i>'; ?>
 					<?php endif; ?>
 					<br>
 
 					<i class="fa fa-envelope fa-1x"></i>
-					<?php if($client['phone_number']): ?>&nbsp;&nbsp;&nbsp;
-					<a href="mailto:<?php echo $client['email_address'].'?subject=Mail from Our Site'; ?>"> <?php echo $client['email_address']; ?></a>
+					<?php if($client['email_address']): ?>&nbsp;&nbsp;&nbsp;
+					<a href="mailto:<?php echo $client['email_address'].'?subject=Mail from Our Site'; ?>"><small> <?php echo $client['email_address']; ?></small></a>
 					<?php else : echo '<i>&nbsp;&nbsp;&nbsp;<small>no email_address</small></i>'; ?>
 					<?php endif; ?>
 				</div>
 			</div>
 
-			<ul class="list-group">
-				<li class="list-group-item text-muted">Activity 
-					<i class="fa fa-dashboard fa-1x"></i>
-				</li>
-
-				<li class="list-group-item text-right">
-					<span class="pull-left">
-						<strong>Shares</strong>
-					</span> 125
-				</li>
-
-				<li class="list-group-item text-right">
-					<span class="pull-left">
-						<strong>Likes</strong>
-					</span> 13
-				</li>
-
-				<li class="list-group-item text-right">
-					<span class="pull-left">
-						<strong>Posts
-						</strong>
-					</span> 37
-				</li>
-
-				<li class="list-group-item text-right">
-					<span class="pull-left">
-						<strong>Followers
-						</strong>
-					</span> 78
-				</li>
-
-			</ul>
-
-			<div class="panel panel-default">
+			<!-- <div class="panel panel-default">
 				<div class="panel-heading">Social Media</div>
 				<div class="panel-body"> 
 					<i class="fa fa-facebook fa-2x"></i> 
@@ -100,64 +111,87 @@
 					<i class="fa fa-pinterest fa-2x"></i> 
 					<i class="fa fa-google-plus fa-2x"></i>
 				</div>
-			</div>
+			</div> -->
 		</div>
+
 		<div class="col-sm-9">
 			<ul class="nav nav-tabs" id="myTab">
 				<li class="active">
 					<a href="#transactions" data-toggle="tab">Transactions</a>
 				</li>
-				<li class="">
+				<!-- <li class="">
 					<a href="#messages" data-toggle="tab">Messages</a>
 				</li>
 				<li class="">
 					<a href="#settings" data-toggle="tab">Settings</a>
-				</li>
+				</li> -->
 			</ul>
 			<div class="tab-content">
 
 			<!-- home tab -->
-				<div class="tab-pane active" id="home">
+				<div class="tab-pane active" id="transactions">
 					<div class="table-responsive">
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>Amount</th>
-									<th>Interest</th>
-									<th>Type</th>
-									<th>Balance</th>
-									<th>Date</th>
-								</tr>
-							</thead>
-							<tbody id="items">
-								<tr>
-									<td>1</td>
-									<td>&#8369; 20,000</td>
-									<td>&#8369; 6,000</td>
-									<td>BORROW</td>
-									<td>&#8369; 26,000</td>
-									<td>March 11, 2017</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>&#8369; 4,350</td>
-									<td><small><i>NA</i></small></td>
-									<td>PAYMENT</td>
-									<td>&#8369; 21,650</td>
-									<td>March 24, 2017</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>&#8369; 4,000</td>
-									<td>&#8369; 200</td>
-									<td>BORROW</td>
-									<td>&#8369; 25,850</td>
-									<td>March 25, 2017</td>
-								</tr>
-							</tbody>
-						</table>
+						<h1></h1>
+						<div class="col-md-12">
+							<table class="table table-hover table-striped" id="dataTable">
+								<thead>
+									<tr>	
+										<th class="no-sort">#</th>
+										<th>Amount</th>
+										<th>Interest</th>
+										<th>Type</th>
+										<th>Balance</th>
+										<th>Date</th>
+									</tr>
+								</thead>
+								<tbody id="items">
+								<?php 
+								if ($transactions) {
+									$num = count($transactions);
+									foreach ($transactions as $transaction) {
+										$tdata = $transaction['Transaction']; 
+										$date = date_create($tdata['created']);
+										switch ($tdata['type']) {
+											case '1':
+												$ttype = 'PRINCIPAL';
+												break;
+											case '2':
+												$ttype = 'ADVANCE';
+												break;
+											case '3':
+												$ttype = 'PAYMENT';
+												break;
+											default :
+												$ttype = 'NA';
+												break;
+										}
+
+										?>
+									<?php if (isset($tdata['balance']) && $tdata['balance'] == 0) { ?>
+										<tr class="full-payment">
+											<td colspan="6">
+												<div class="text-center">
+													<small><i>FULL PAYMENT</i></small>
+												</div>
+											</td>
+										</tr>
+									<?php } ?>
+									<tr class="<?php echo $num==count($transactions) ? 'latest-transaction' : '';?>" >
+										<td><?php echo $num; ?></td>
+										<td>&#8369; <?php echo $tdata['amount']; ?></td>
+										<td><?php echo $tdata['interest']!=0?'&#8369; '.$tdata['interest']:'<small><i>NA</i></small>'; ?></td>
+										<td><?php echo $ttype; ?></td>
+										<td>&#8369; <?php echo $tdata['balance']; ?></td>
+										<td><?php echo date_format($date, 'F j, Y | g:ia l'); ?> &nbsp;&nbsp;&nbsp;<span class="label label-warning">NEW</span></td>
+									</tr>
+								<?php 
+								$num--;
+								} } ?>
+
+								</tbody>
+							</table>
 						<hr>
+						</div>
 						<div class="row">
 							<div class="col-md-4 col-md-offset-4 text-center">
 								<ul class="pagination" id="myPager"></ul>
@@ -294,5 +328,7 @@
 				</div>
 			</div>
 		</div>
-</div>
+	</div>
+	<?php echo $this->element('modals'); ?>
+
 </div>

@@ -1,0 +1,52 @@
+.dateInput {
+	width: 30%;
+	display: inline;
+	margin: 1%;
+}
+.profile-image{
+	margin: auto;
+	padding: 15px;
+}
+.profile-link{
+	float: none !important;
+}
+.login-form{
+	margin-top: 100px;
+}
+.login-email{
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.login-pass{
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-top: 0; 
+}
+.login-submit{
+	background: #f0677c;
+	border: 0;
+}
+.login-submit:hover{
+	background: #cc5063;
+}
+.forgot-pass{
+	margin-top: 15px;
+}
+
+/*.latest-transaction{
+	background: #c4e2a0 !important;
+}*/
+.full-payment{
+	background: #c0c7c0 !important;
+}
+@media screen and (max-width: 992px) {
+	.profile-name{
+		text-align: center;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.login-form{
+		margin-top: 30px;
+	}
+}
