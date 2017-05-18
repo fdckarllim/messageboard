@@ -59,9 +59,9 @@ class ClientsController extends AppController
 		$this->set('transactions', $this->getClientTransactions($id));
 		$principal = $this->getClientPrincipal($id);
 		$client['Client']['principal'] = isset($principal['Principal']) ? $principal['Principal'] : '';
-		$age = $this->getage($client['Client']['birthdate']);
+		// $age = $this->getage($client['Client']['birthdate']);
 		$this->set('principal', isset($principal['Principal']) ? $principal['Principal'] : '');
-		$this->set('clientAge', $age);
+		// $this->set('clientAge', $age);
 		$this->set('client', $client['Client']);
 
 		if ($this->request->is('post')) {
@@ -87,7 +87,7 @@ class ClientsController extends AppController
 			$this->Client->create();
 			if ($this->Client->save($this->request->data)) {
 				$client_id = $this->Client->getLastInsertId();
-				return $this->redirect(array('controller' => 'clients', 'action' => 'add?step=2&client_id='.$client_id));
+				return $this->redirect(array('controller' => 'clients', 'action' => 'details',$client_id));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
 			}

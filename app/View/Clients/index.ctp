@@ -29,7 +29,7 @@
             $id = $client['Client']['id'];
             echo "<tr>
                 <td>{$client['Client']['id']}</td>
-                <td>{$client['Client']['lname']}, {$client['Client']['fname']}</td>
+                <td>{$client['Client']['fname']} {$client['Client']['lname']}</td>
                 <td><a href='".$this->Html->url('/clients/details/'.$id)."' class='btn btn-xs btn-primary'>View</a></td>
             </tr>";
         } ?>
