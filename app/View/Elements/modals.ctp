@@ -111,13 +111,30 @@
 
 				<!-- Modal Body -->
 				<div class="modal-body">
-				 to be continued.....
+
+					<?php echo $this->Form->create('Advancement', array('class' => 'form-horizontal')); ?>
+					<?php echo $this->Flash->render(); ?>
+					<div class="form-group">
+						<label  class="col-sm-2 control-label"
+						  for="amount">Amount</label>
+						<div class="col-sm-10">
+							<div class="input-group"> 
+	        					<span class="input-group-addon">&#8369;</span>
+								<?php echo $this->Form->input('amount', array('label' => false, 'class' => 'form-control input-md currency', 'id' => 'txtInterest', 'placeholder' => 'Place amount to borrow...', 'required' => true)); ?>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label  class="col-sm-2 control-label"
+						  for="amount">Interest</label>
+						<label class="col-sm-10 control-label" id='lblInterest'>&#8369; 0</label>
+					</div>
 				</div>
 
 				<!-- Modal Footer -->
 				<div class="modal-footer">
 					<button type="reset" class="btn btn-default">Cancel</button>
-					<button id="submit" name="submit" class="btn btn-primary" value="addpayment">Save</button>
+					<button id="submit" name="submit" class="btn btn-primary" value="addadvance">Save</button>
 				</div>
 			</div>
 		</div>

@@ -31,7 +31,7 @@
     <![endif]-->
 </head>
 
-    <header>
+   <!--  <header>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -42,7 +42,7 @@
                 </small>
             </div>
         </div>
-    </header>
+    </header> -->
     <!-- HEADER END-->
 
     <?php $name = AuthComponent::user('name'); 
@@ -119,7 +119,7 @@
                                 <?php echo $this->Html->link(__('Clients'), array('controller' => 'clients', 'action' => 'index')); ?>
                             </li>
                             <li>
-                                <?php echo $this->Html->link(__('Reports'), array('controller' => 'users', 'action' => 'index')); ?>
+                                <?php echo $this->Html->link(__('Reports'), array('controller' => 'reports', 'action' => 'index')); ?>
                             </li>
                             <li>
                                 <?php echo $this->Html->link(__('Profile'), array('controller' => 'users', 'action' => 'profile', AuthComponent::user('id'))); ?>
@@ -164,6 +164,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#dataTable').DataTable( {
+                "order": [],
                 "columnDefs": [ {
                 "targets": 'no-sort',
                 "orderable": false,
@@ -175,6 +176,11 @@
             yearRange: "-100:+0",
             showButtonPanel: true,
             changeMonth: true
+        });
+        $('#txtInterest').keyup(function(){
+            var amount = $(this).val();
+            var interest = amount * .05;
+            $('#lblInterest').html('&#8369; '+interest);
         });
     </script>
 </body>

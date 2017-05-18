@@ -33,6 +33,12 @@
 	margin-top: 15px;
 }
 
+/*.latest-transaction{
+	background: #c4e2a0 !important;
+}*/
+.full-payment{
+	background: #c0c7c0 !important;
+}
 @media screen and (max-width: 992px) {
 	.profile-name{
 		text-align: center;

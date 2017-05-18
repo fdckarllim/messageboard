@@ -14,9 +14,13 @@
 
 			<div class="row">
 				<div class="col-sm-12">
-					<button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#paymentModal">PAY NOW!</button><br/>
+					<button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#paymentModal" <?php echo isset($client['balance']) && $client['balance'] != 0 ? '' : 'disabled="true"';?>>PAY NOW!</button><br/>
+					<!-- hide principal button if principal amount is set -->
+					<?php if(isset($principal['amount'])) : ?>
 					<button type="button" class="btn btn-info btn-md btn-block" data-toggle="modal" data-target="#advanceModal">ADVANCE</button>
+					<?php else : ?>
 					<button type="button" class="btn btn-primary btn-md btn-block" data-toggle="modal" data-target="#principalModal">ADD PRINCIPAL</button>
+					<?php endif; ?>
 				</div>
 			</div>
 			<br/>
@@ -55,10 +59,30 @@
 					<span class="pull-left">
 						<strong>Current Balance
 						</strong>
-					</span> 78
+					</span> <?php echo $client['balance'] ? "&#8369; ".$client['balance'] : "<small><i>No Balance</i></small>"; ?>
 				</li>
 
 			</ul>
+			<!-- next pay info panel -->
+			<div class="panel panel-default">
+				<div class="panel-heading">Next Pay 
+				</div>
+				<div class="panel-body">
+					<i class="fa fa-money fa-1x"></i>
+					<?php if($client['balance']): ?>&nbsp;&nbsp;&nbsp;&nbsp;
+						&#8369; <small> <?php echo $client['phone_number'];?></small>
+					<?php else : echo '<i>&nbsp;&nbsp;&nbsp;<small>nothing to pay</small></i>'; ?>
+					<?php endif; ?>
+					<br>
+
+					<i class="fa fa-calendar fa-1x"></i>
+					<?php if($client['email_address']): ?>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="mailto:<?php echo $client['email_address'].'?subject=Mail from Our Site'; ?>"><small> <?php echo $client['email_address']; ?></small></a>
+					<?php else : echo '<i>&nbsp;&nbsp;&nbsp;&nbsp;<small>no email_address</small></i>'; ?>
+					<?php endif; ?>
+				</div>
+			</div>
+
 			<div class="panel panel-default">
 				<div class="panel-heading">Contact Info 
 				</div>
@@ -95,12 +119,12 @@
 				<li class="active">
 					<a href="#transactions" data-toggle="tab">Transactions</a>
 				</li>
-				<li class="">
+				<!-- <li class="">
 					<a href="#messages" data-toggle="tab">Messages</a>
 				</li>
 				<li class="">
 					<a href="#settings" data-toggle="tab">Settings</a>
-				</li>
+				</li> -->
 			</ul>
 			<div class="tab-content">
 
@@ -112,7 +136,7 @@
 							<table class="table table-hover table-striped" id="dataTable">
 								<thead>
 									<tr>	
-										<th>#</th>
+										<th class="no-sort">#</th>
 										<th>Amount</th>
 										<th>Interest</th>
 										<th>Type</th>
@@ -143,13 +167,22 @@
 										}
 
 										?>
-									<tr>
+									<?php if (isset($tdata['balance']) && $tdata['balance'] == 0) { ?>
+										<tr class="full-payment">
+											<td colspan="6">
+												<div class="text-center">
+													<small><i>FULL PAYMENT</i></small>
+												</div>
+											</td>
+										</tr>
+									<?php } ?>
+									<tr class="<?php echo $num==count($transactions) ? 'latest-transaction' : '';?>" >
 										<td><?php echo $num; ?></td>
 										<td>&#8369; <?php echo $tdata['amount']; ?></td>
-										<td>&#8369; <?php echo $tdata['interest']; ?></td>
+										<td><?php echo $tdata['interest']!=0?'&#8369; '.$tdata['interest']:'<small><i>NA</i></small>'; ?></td>
 										<td><?php echo $ttype; ?></td>
 										<td>&#8369; <?php echo $tdata['balance']; ?></td>
-										<td><?php echo date_format($date, 'F j, Y | g:ia l'); ?></td>
+										<td><?php echo date_format($date, 'F j, Y | g:ia l'); ?> &nbsp;&nbsp;&nbsp;<span class="label label-warning">NEW</span></td>
 									</tr>
 								<?php 
 								$num--;
