@@ -1,7 +1,7 @@
 <div class="container bootstrap snippet">
 	<div class="row">
 		<div class="col-md-10 col-sm-12 profile-name">
-			<h1><?php echo $client['lname'].', '.$client['fname'].' '.$client['mname']; ?></h1>
+			<h1><?php echo $client['fname'].' '.$client['mname'].' '.$client['lname']; ?></h1>
 
 		</div>
 		<!-- <div class="col-md-2 col-sm-12">
@@ -75,15 +75,15 @@
 					<?php endif; ?>
 					<br>
 
-					<i class="fa fa-calendar fa-1x"></i>
+					<!-- <i class="fa fa-calendar fa-1x"></i>
 					<?php if($client['email_address']): ?>&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href="mailto:<?php echo $client['email_address'].'?subject=Mail from Our Site'; ?>"><small> <?php echo $client['email_address']; ?></small></a>
 					<?php else : echo '<i>&nbsp;&nbsp;&nbsp;&nbsp;<small>no email_address</small></i>'; ?>
-					<?php endif; ?>
+					<?php endif; ?> -->
 				</div>
 			</div>
 
-			<div class="panel panel-default">
+			<!-- <div class="panel panel-default">
 				<div class="panel-heading">Contact Info 
 				</div>
 				<div class="panel-body">
@@ -100,7 +100,7 @@
 					<?php else : echo '<i>&nbsp;&nbsp;&nbsp;<small>no email_address</small></i>'; ?>
 					<?php endif; ?>
 				</div>
-			</div>
+			</div> -->
 
 			<!-- <div class="panel panel-default">
 				<div class="panel-heading">Social Media</div>

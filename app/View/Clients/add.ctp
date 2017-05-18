@@ -72,76 +72,8 @@
   <div class="form-group">
     <label class="col-md-4 control-label" for="lname">Lastname</label>  
     <div class="col-md-5">
-      <?php echo $this->Form->input('lname', array('label' => false, 'class' => 'form-control input-md', 'placeholder' => 'Your lastname here...', 'required' => true)); ?>
+      <?php echo $this->Form->input('lname', array('label' => false, 'class' => 'form-control input-md', 'placeholder' => 'Your lastname here...')); ?>
       
-    </div>
-  </div>
-
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="nickname">Nickname</label>  
-    <div class="col-md-5">
-      <?php echo $this->Form->input('nickname', array('label' => false, 'class' => 'form-control input-md', 'placeholder' => 'Your nickname here...', 'required' => true)); ?>
-      
-    </div>
-  </div>
-
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="birthdate">Birthdate</label>  
-    <div class="col-md-5">
-    <?php echo $this->Form->input('birthdate', array('type' => 'date', 'empty' => array('day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR'), 'label' => false, 'required' => true, 'class' => 'form-control input-md dateInput', 'placeholder' => 'Your birthdate here...', 'minYear' => date('Y') - 70, 'maxYear' => date('Y') - 18)); ?>
-    </div>
-  </div>
-
-  <!-- Multiple Radios (inline) -->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="gender">Gender</label>
-    <div class="col-md-4"> 
-        <?php echo $this->Radio->display('input1'); ?>
-    </div>
-  </div>
-
-  <!-- email input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="login_id">Email</label>  
-    <div class="col-md-5">
-      <?php echo $this->Form->input('email_address', array('type' => 'email', 'label' => false, 'class' => 'form-control input-md', 'placeholder' => 'Your email address here...')); ?>
-      
-    </div>
-  </div>
-
-  <!-- phone input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="phone_number">Phone number</label>  
-    <div class="col-md-5">
-      <?php echo $this->Form->input('phone_number', array('label' => false, 'class' => 'form-control input-md', 'placeholder' => 'Your phone number here...')); ?>
-      
-    </div>
-  </div>
-
-  <!-- Text input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="login_id">Login_ID</label>  
-    <div class="col-md-5">
-      <?php echo $this->Form->input('login_id', array('type' => 'text', 'label' => false, 'class' => 'form-control input-md', 'placeholder' => 'Your login_id here...', 'required' => true)); ?>
-      
-    </div>
-  </div>
-
-  <!-- Password input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="password">Password</label>  
-    <div class="col-md-5">
-      <?php echo $this->Form->input('password', array('label' => false, 'class' => 'form-control input-md', 'placeholder' => 'Your password here...', 'required' => true)); ?>
-    </div>
-  </div>
-
-  <!-- Password input-->
-  <div class="form-group">
-    <label class="col-md-4 control-label" for="cpassword">Confirm Password</label>  
-    <div class="col-md-5">
-      <?php echo $this->Form->input('cpassword', array('type' => 'password','label' => false, 'class' => 'form-control input-md', 'placeholder' => 'Please confirm your password...', 'required' => true)); ?>
     </div>
   </div>
 
