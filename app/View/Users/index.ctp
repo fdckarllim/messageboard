@@ -5,23 +5,23 @@
     </div>
 
 </div>
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-12">
         <div class="alert alert-success">
             This is a simple admin template that can be used for your small project or may be large projects. This is free for personal and commercial use.
         </div>
     </div>
 
-</div>
+</div> -->
 
 <div class="row">
 <!-- clients link easy access widget -->
 	<div class="col-md-3 col-sm-3 col-xs-6">
-		<a href="<?php echo $this->Html->url('/clients/'); ?>">
+		<a class="btn-box" href="<?php echo $this->Html->url('/clients/'); ?>">
 			<div class="dashboard-div-wrapper bk-clr-one">
 				<i  class="fa fa-users dashboard-div-icon" ></i>
 				<div class="progress progress-striped active">
-					<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+					<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
 					</div>
 				</div>
 				<h5>Clients </h5>
@@ -30,11 +30,11 @@
 	</div>
 <!-- reports link easy access widget -->
 	<div class="col-md-3 col-sm-3 col-xs-6">
-		<a href="<?php echo $this->Html->url('/reports/'); ?>">
+		<a class="btn-box" href="<?php echo $this->Html->url('/reports/'); ?>">
 			<div class="dashboard-div-wrapper bk-clr-two">
 				<i  class="fa fa-file-zip-o dashboard-div-icon" ></i>
 				<div class="progress progress-striped active">
-					<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+					<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
 					</div>
 				</div>
 				<h5>Reports </h5>
@@ -43,11 +43,11 @@
 	</div>
 <!-- settings link easy access widget -->
 	<div class="col-md-3 col-sm-3 col-xs-6">
-		<a href="<?php echo $this->Html->url('/settings/'); ?>">
+		<a class="btn-box" href="<?php echo $this->Html->url('/settings/'); ?>">
 			<div class="dashboard-div-wrapper bk-clr-three">
 				<i  class="fa fa-cogs dashboard-div-icon" ></i>
 				<div class="progress progress-striped active">
-					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
 					</div>
 
 				</div>
@@ -57,11 +57,11 @@
 	</div>
 <!-- alerts link easy access widget -->
 	<div class="col-md-3 col-sm-3 col-xs-6">
-		<a href="<?php echo $this->Html->url('/alerts/'); ?>">
+		<a class="btn-box" href="<?php echo $this->Html->url('/alerts/'); ?>">
 			<div class="dashboard-div-wrapper bk-clr-four">
 				<i  class="fa fa-bell-o dashboard-div-icon" ></i>
 				<div class="progress progress-striped active">
-					<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+					<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
 					</div>
 				</div>
 				<h5>Alerts </h5>
@@ -69,7 +69,7 @@
 		</a>
 	</div>
 </div>
-
+<!-- 
 <div class="row">
     <div class="col-md-6">
           <div class="notice-board">
@@ -221,12 +221,12 @@
     </div>
          </div>
     </div>
-</div>
-<div class="actions">
+</div> -->
+<!-- <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Profile'), array('action' => 'profile', AuthComponent::user('id'))); ?></li>
 		<li><?php echo $this->Html->link(__('Messages'), array('controller' => 'messages', 'action' => 'index')); ?></li>
 		<li><?php echo $this->Html->link(__('Logout'), array('controller' => 'users', 'action' => 'logout')); ?></li>
 	</ul>
-</div>
+</div> -->

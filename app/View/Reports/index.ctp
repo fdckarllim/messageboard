@@ -11,14 +11,19 @@
 			</tr>
 		</thead>
 		<tbody>
-		<?php foreach ($reports as $report) { ?>
-			<tr>
-				<td><?php echo  $report['id']; ?></td>
-				<td><?php echo $report['name']['fname'].' '.$report['name']['lname']; ?></td>
-				<td><?php echo $report['total_interest']; ?></td>
-				<td><?php echo $report['date_paid']; ?></td>
-			</tr>
-		<?php } ?>
+		<?php
+		if (isset($reports) && $reports) {
+			foreach ($reports as $report) { ?>
+				<tr>
+					<td><?php echo  $report['id']; ?></td>
+					<td><?php echo $report['name']['fname'].' '.$report['name']['lname']; ?></td>
+					<td><?php echo $report['total_interest']; ?></td>
+					<td><?php echo $report['date_paid']; ?></td>
+				</tr>
+			<?php } 
+		} ?>
+		
+
 
 		</tbody>
 	</table>

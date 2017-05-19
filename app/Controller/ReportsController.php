@@ -52,7 +52,9 @@ class ReportsController extends AppController
 				'date_paid' => $det['date_paid']
 			);
 		}
-
-		$this->set('reports', $reportList);
+		if (isset($reportList) && $reportList) {
+			$this->set('reports', $reportList);
+		}
+		
 	}	
 }

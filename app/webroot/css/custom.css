@@ -39,6 +39,30 @@
 .full-payment{
 	background: #c0c7c0 !important;
 }
+.navbar{
+	min-height: 70px;
+}
+.navbar-brand{
+	padding: 0; 
+	color: white !important;
+}
+.navbar-brand > img{
+	max-height: 69px;
+}
+.navbar-inverse{
+	background: #c36464 !important;
+}
+.navbar-toggle{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.btn-box:hover,
+.btn-box:hover .dashboard-div-wrapper > i,
+.btn-box:hover .dashboard-div-wrapper > h5{
+	text-decoration: none;
+	color: black;
+}
+
 @media screen and (max-width: 992px) {
 	.profile-name{
 		text-align: center;

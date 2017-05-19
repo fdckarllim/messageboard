@@ -41,9 +41,9 @@ body {
 .page-head-line {
     font-weight: 900;
     padding-bottom: 20px;
-    border-bottom: 2px solid #F0677C;
+    border-bottom: 2px solid #c36464;
     text-transform: uppercase;
-    color: #F0677C;
+    color: #c36464;
     font-size: 20px;
     margin-bottom: 40px;
 }
@@ -70,7 +70,7 @@ margin-bottom: 20px;
 color: #fff;
 text-align: center;
 cursor:pointer;
-background-color:#F0677C;
+background-color:#c36464;
 -webkit-border-radius:50%;
     -moz-border-radius:50%;
 }
@@ -78,7 +78,7 @@ background-color:#F0677C;
    HEADER SECTION STYLES
  ============================================================ */
 header {
-    background-color: #F0677C;
+    background-color: #c36464;
     color: #fff;
     padding: 10px;
     text-align: right;
@@ -109,7 +109,7 @@ header {
     -moz-border-radius: 50%;
     height: 60px;
     width: 60px;
-    background-color: #F0677C;
+    background-color: #c36464;
     color: #fff;
 }
 
@@ -173,20 +173,20 @@ header {
 }
 
 .menu-section .nav > li > a:hover,.menu-section .nav > li > a:focus {
-    background-color: #F0677C!important;
+    background-color: #c36464!important;
 }
 
 .menu-section .dropdown-menu > li > a:hover,.menu-section .dropdown-menu > li > a:focus {
-    background-color: #F0677C!important;
+    background-color: #c36464!important;
 }
 
 .navbar-inverse {
-    background-color: #C36464;
+    background-color: #c36464;
     border-color: transparent;
 }
 
 .navbar-toggle {
-    background-color: #F0677C;
+    background-color: #c36464;
     border: 1px solid #fff;
 }
 
