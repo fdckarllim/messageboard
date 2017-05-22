@@ -30,7 +30,7 @@
 						<label class="col-sm-3 control-label"
 						for="inputPassword3" >Months To Pay</label>
 						<div class="col-sm-9">
-							<?php echo $this->Form->input('months_to_pay', array('type' => 'number', 'min' => 1, 'max' => 12, 'label' => false, 'class' => 'form-control input-md', 'placeholder' => 'Number of months to pay...')); ?>
+							<?php echo $this->Form->input('months_to_pay', array('type' => 'number', 'min' => .5, 'max' => 12, 'step' => .5, 'label' => false, 'class' => 'form-control input-md', 'placeholder' => 'Number of months to pay...')); ?>
 						</div>
 					</div>
 					<div class="form-group">

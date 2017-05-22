@@ -69,8 +69,8 @@
 				</div>
 				<div class="panel-body">
 					<i class="fa fa-money fa-1x"></i>
-					<?php if($client['balance']): ?>&nbsp;&nbsp;&nbsp;&nbsp;
-						&#8369; <small> <?php echo $client['phone_number'];?></small>
+					<?php if($perpay): ?>&nbsp;&nbsp;&nbsp;&nbsp;
+						&#8369; <small> <?php echo $perpay;?></small>
 					<?php else : echo '<i>&nbsp;&nbsp;&nbsp;<small>nothing to pay</small></i>'; ?>
 					<?php endif; ?>
 					<br>
@@ -151,6 +151,7 @@
 									foreach ($transactions as $transaction) {
 										$tdata = $transaction['Transaction']; 
 										$date = date_create($tdata['created']);
+										$datecheck = explode(' ', $tdata['created']); 
 										switch ($tdata['type']) {
 											case '1':
 												$ttype = 'PRINCIPAL';
@@ -182,7 +183,11 @@
 										<td><?php echo $tdata['interest']!=0?'&#8369; '.$tdata['interest']:'<small><i>NA</i></small>'; ?></td>
 										<td><?php echo $ttype; ?></td>
 										<td>&#8369; <?php echo $tdata['balance']; ?></td>
-										<td><?php echo date_format($date, 'F j, Y | g:ia l'); ?> &nbsp;&nbsp;&nbsp;<span class="label label-warning">NEW</span></td>
+										<td><?php echo date_format($date, 'F j, Y | g:ia l'); ?> &nbsp;&nbsp;&nbsp;
+											<?php if ($datecheck[0] == date("Y-m-d")) { ?>
+											<span class="label label-warning">NEW</span>
+											<?php } ?>
+										</td>
 									</tr>
 								<?php 
 								$num--;

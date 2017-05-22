@@ -58,11 +58,13 @@ class ClientsController extends AppController
 
 		$this->set('transactions', $this->getClientTransactions($id));
 		$principal = $this->getClientPrincipal($id);
+		$perpay = $this->getPerPay($principal['Principal']['amount'], $principal['Principal']['months_to_pay']);
 		$client['Client']['principal'] = isset($principal['Principal']) ? $principal['Principal'] : '';
 		// $age = $this->getage($client['Client']['birthdate']);
 		$this->set('principal', isset($principal['Principal']) ? $principal['Principal'] : '');
 		// $this->set('clientAge', $age);
 		$this->set('client', $client['Client']);
+		$this->set('perpay', $perpay);
 
 		if ($this->request->is('post')) {
 			switch ($this->request->data['submit']) {
@@ -177,9 +179,22 @@ class ClientsController extends AppController
 		);
 		return $transactions;
 	}
+	public function getPerPay($amount, $months_to_pay){
+		if ($amount && $months_to_pay) {
+			$interest = $this->getInterest($amount, $months_to_pay);
+			if ($months_to_pay > .5) {
+				$fee = ($amount+ $interest) / ($months_to_pay / .5) ;
+			} else {
+				$fee = $amount + $interest;
+			}
+			return $fee;
+		} else {
+			return false;
+		}
+	}
 	public function getInterest($amount, $months_to_pay){
 		if ($amount && $months_to_pay) {
-			return $interest = $amount * (.1 * $months_to_pay);
+			return $interest = $amount * (.05 * ($months_to_pay / .5));
 		} else {
 			return false;
 		}

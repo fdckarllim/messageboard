@@ -56,7 +56,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/messageboard/users" class="navbar-brand"><img src="<?php echo $this->webroot.'/img/companylogo.png';?>"></a>
+                <a href="/messageboard/users" class="navbar-brand"><img src="<?php echo $this->webroot.'img/companylogo.png';?>"></a>
                 <?php //echo $this->Html->link(__('LMS'), array('controller' => 'users', 'action' => 'index'), array('class' => 'navbar-brand')); ?>
                 <!-- <a class="navbar-brand" href="index.html">
                 LMS -->
