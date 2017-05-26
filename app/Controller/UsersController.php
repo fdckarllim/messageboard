@@ -40,6 +40,10 @@ class UsersController extends AppController {
 	}
 
 	public function profile($id = null) {
+		if ($id && $id != AuthComponent::user('id')) {
+			return $this->redirect(array('controller' => 'users', 'action' => 'profile', AuthComponent::user('id')));
+		}
+		$this->layout ='admin';
 		$this->set('headtitle', 'User Profile');
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Invalid user'));
@@ -64,6 +68,9 @@ class UsersController extends AppController {
 	}
 
 	public function edit($id = null) {
+		if ($id && $id != AuthComponent::user('id')) {
+			return $this->redirect(array('controller' => 'users', 'action' => 'profile', AuthComponent::user('id')));
+		}
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Invalid user'));
 		}
